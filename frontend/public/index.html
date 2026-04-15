@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="GenScholar — AI-powered research paper formatter. Convert your draft to IEEE, APA, Springer, ACM, Scopus, or Elsevier format in seconds."/>
+  <title>GenScholar — AI Research Paper Formatter</title>
+  <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">
+      <span class="nav-logo-gs">GenScholar</span>
+      <span class="nav-logo-dot"></span>
+      <span class="nav-logo-sub">Research AI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#formats">Formats</a></li>
+      <li><a href="#how">Methodology</a></li>
+      <li><a href="#app-section">Formatter</a></li>
+    </ul>
+    <a class="nav-cta" href="app.html">
+      Open Formatter →
+    </a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-rule-top"></div>
+  <div class="hero-watermark">GS</div>
+
+  <div class="hero-vol-info">Vol. 1 · Issue 1 · PCCOE MDM 2025–26 · Generative AI Applications</div>
+
+  <h1 class="hero-title">
+    From rough draft<br/>
+    to <em>publication-ready</em><br/>
+    in under a minute.
+  </h1>
+
+  <div class="hero-rule"></div>
+
+  <p class="hero-abstract">
+    <strong>Abstract —</strong> Manual reformatting of academic manuscripts consumes 20–30% of a researcher's
+    productive time and remains the leading cause of desk rejections. GenScholar presents a
+    <em>multi-standard research restructuring agent</em> powered by Google Gemini, capable of transforming
+    any research draft into a fully compliant IEEE, APA, Springer, ACM, Scopus, or Elsevier manuscript
+    with complete compliance analysis in under 60 seconds.
+  </p>
+
+  <div class="hero-keywords">
+    <span>Keywords —</span>
+    Generative AI · Research Formatting · Large Language Models · Academic Publishing · Document Restructuring
+  </div>
+
+  <div class="hero-btns">
+    <a class="btn-primary" href="app.html">Format Your Paper</a>
+    <a class="btn-secondary" href="#how">Read Methodology</a>
+  </div>
+
+  <div class="hero-stats-row">
+    <div class="hero-stat">
+      <div class="hero-stat-n">6+</div>
+      <div class="hero-stat-l">Format Standards</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">&lt;60s</div>
+      <div class="hero-stat-l">vs. 10-hour manual</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">5</div>
+      <div class="hero-stat-l">AI Analysis Tools</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">Free</div>
+      <div class="hero-stat-l">With API Key</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FORMATS ══ -->
+<section class="section section--ruled" id="formats">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">§1 · Supported Standards</div>
+      <h2 class="section-title">Every major publication format, mastered.</h2>
+      <div class="section-rule"></div>
+      <p class="section-body">
+        Each academic venue enforces its own distinct citation style, layout rules, structural requirements,
+        and word limits. Our AI has internalized all of them.
+      </p>
+    </div>
+
+    <div class="formats-grid reveal">
+      <div class="fmt-card">
+        <div class="fmt-badge badge-ieee">IEEE</div>
+        <div class="fmt-name">IEEE Conference & Journal</div>
+        <div class="fmt-desc">Two-column layout, numeric citations [1], structured headings in small caps. The gold standard for engineering and CS conferences.</div>
+        <div class="fmt-chips">
+          <span class="fmt-chip">Abstract ≤250 words</span>
+          <span class="fmt-chip">6-page limit</span>
+          <span class="fmt-chip">Numeric refs</span>
+          <span class="fmt-chip">Times New Roman 10pt</span>
+        </div>
+      </div>
+      <div class="fmt-card">
+        <div class="fmt-badge badge-apa">APA 7th</div>
+        <div class="fmt-name">American Psychological Assoc.</div>
+        <div class="fmt-desc">Author-year citations (Smith, 2022), double-spaced throughout, running head on every page. Dominant in social sciences and psychology.</div>
+        <div class="fmt-chips">
+          <span class="fmt-chip">150–250 abstract</span>
+          <span class="fmt-chip">DOI required</span>
+          <span class="fmt-chip">Running head</span>
+          <span class="fmt-chip">1-inch margins</span>
+        </div>
+      </div>
+      <div class="fmt-card">
+        <div class="fmt-badge badge-springer">Springer</div>
+        <div class="fmt-name">Springer LNCS</div>
+        <div class="fmt-desc">Single-column with strict 150-word abstract cap and 15-page maximum. Mandatory keywords section. LaTeX LNCS class required for final.</div>
+        <div class="fmt-chips">
+          <span class="fmt-chip">Abstract ≤150 (strict)</span>
+          <span class="fmt-chip">≤15 pages</span>
+          <span class="fmt-chip">Keywords required</span>
+        </div>
+      </div>
+      <div class="fmt-card">
+        <div class="fmt-badge badge-acm">ACM</div>
+        <div class="fmt-name">ACM Digital Library / SIGCHI</div>
+        <div class="fmt-desc">Two-column format with mandatory CCS Concepts classification system. ACM rights block in the first-column footer. ORCID verified authors.</div>
+        <div class="fmt-chips">
+          <span class="fmt-chip">150–200 abstract</span>
+          <span class="fmt-chip">CCS Concepts</span>
+          <span class="fmt-chip">Rights block</span>
+        </div>
+      </div>
+      <div class="fmt-card">
+        <div class="fmt-badge badge-scopus">Scopus</div>
+        <div class="fmt-name">Scopus Indexed Journals</div>
+        <div class="fmt-desc">Structured abstract with Background / Methods / Results / Conclusion headers. Mandatory DOI, ORCID, conflict of interest, and funding statements.</div>
+        <div class="fmt-chips">
+          <span class="fmt-chip">Structured abstract</span>
+          <span class="fmt-chip">DOI mandatory</span>
+          <span class="fmt-chip">ORCID</span>
+        </div>
+      </div>
+      <div class="fmt-card">
+        <div class="fmt-badge badge-elsevier">Elsevier</div>
+        <div class="fmt-name">Elsevier Journals</div>
+        <div class="fmt-desc">Harvard-style author-year citations with a Highlights section (3–5 bullets, ≤125 chars each). Graphical abstract and data availability statement expected.</div>
+        <div class="fmt-chips">
+          <span class="fmt-chip">Highlights section</span>
+          <span class="fmt-chip">Harvard citations</span>
+          <span class="fmt-chip">Data statement</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section class="section section--dark" id="how">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">§2 · Methodology</div>
+      <h2 class="section-title section-title--light">How GenScholar works.</h2>
+      <div class="section-rule"></div>
+      <p class="section-body section-body--light">
+        A layered pipeline of semantic parsing, format-specific rule application, and compliance verification —
+        all driven by a large language model with deep academic publishing knowledge.
+      </p>
+    </div>
+
+    <div class="how-grid reveal">
+      <div class="how-step">
+        <div class="how-num">01</div>
+        <div class="how-title">Paste your draft</div>
+        <div class="how-desc">Submit any research text — title, abstract, body sections, references — in any order or structure.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">02</div>
+        <div class="how-title">Select a format standard</div>
+        <div class="how-desc">Choose from IEEE, APA, Springer, ACM, Scopus, or Elsevier. Each triggers a distinct rule profile.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">03</div>
+        <div class="how-title">LLM semantic parsing</div>
+        <div class="how-desc">Claude identifies sections, citations, equations, tables, and figures — reconstructing the semantic structure of your paper.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">04</div>
+        <div class="how-title">Format transformation</div>
+        <div class="how-desc">Section headings, citation style, abstract structure, required sections (CCS Concepts, Highlights) are all applied automatically.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">05</div>
+        <div class="how-title">Compliance analysis</div>
+        <div class="how-desc">Every rule violation is flagged — errors that cause desk rejection, warnings to fix, and what's already correct.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">06</div>
+        <div class="how-title">Deep tools on demand</div>
+        <div class="how-desc">Run standalone abstract checks, citation validation, readability scoring, and AI title suggestions independently.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Gen<em>Scholar</em></div>
+        <div class="footer-tagline">AI-powered research paper formatter · PCCOE 2025–26</div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Formats</h4>
+          <ul>
+            <li>IEEE Conference & Journal</li>
+            <li>APA 7th Edition</li>
+            <li>Springer LNCS</li>
+            <li>ACM Digital Library</li>
+            <li>Scopus Indexed</li>
+            <li>Elsevier Journals</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li>Format & Restructure</li>
+            <li>Compliance Checker</li>
+            <li>Abstract Analyzer</li>
+            <li>Citation Validator</li>
+            <li>Readability Score</li>
+            <li>Title Suggestions</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Project</h4>
+          <ul>
+            <li>MDM – Gen AI Applications</li>
+            <li>PCCOE, Pune</li>
+            <li>Academic Year 2025–26</li>
+            <li>Powered by Google Gemini</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 GenScholar · PCCOE MDM Project · Built with Google Gemini</span>
+      <span class="footer-copy">CO1 · CO2 · CO3 · CO4</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

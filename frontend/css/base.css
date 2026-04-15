@@ -1,0 +1,147 @@
+/* frontend/css/base.css — Variables, Reset, Typography */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+/* ── Root Variables ── */
+:root {
+  /* Paper-inspired palette — cream, ink, sepia */
+  --cream:        #F7F4EE;
+  --cream2:       #EDE8DF;
+  --cream3:       #E2DACE;
+  --parchment:    #F0EBE1;
+  --ink:          #1A1714;
+  --ink2:         #2E2A26;
+  --ink3:         #35322e;
+  --muted:        #635f57;
+  --faint:        #B5AFA5;
+  --rule:         #D4CFC6;
+  --rule2:        #C5BEB2;
+
+  /* Accent — deep academic red/burgundy */
+  --accent:       #8B2635;
+  --accent2:      #6E1D28;
+  --accent3:      #B84055;
+  --accent-light: #F5E8EA;
+  --accent-mid:   #E8C4CA;
+
+  /* Status */
+  --error:        #C0392B;
+  --error-bg:     #FDF0EE;
+  --warn:         #A0612A;
+  --warn-bg:      #FDF6EE;
+  --ok:           #2A6A3A;
+  --ok-bg:        #EEF6EF;
+  --info:         #1F4E79;
+  --info-bg:      #EEF3FA;
+
+  /* Type */
+  --serif:        'Playfair Display', 'Georgia', serif;
+  --body-serif:   'Source Serif 4', 'Georgia', serif;
+  --mono:         'JetBrains Mono', 'Courier New', monospace;
+
+  /* Spacing */
+  --max-w:        1120px;
+  --section-pad:  100px 6%;
+  --radius:       4px;
+  --radius-lg:    8px;
+
+  /* Shadows */
+  --shadow-sm:    0 1px 3px rgba(26,23,20,0.08), 0 1px 2px rgba(26,23,20,0.04);
+  --shadow-md:    0 4px 12px rgba(26,23,20,0.10), 0 2px 4px rgba(26,23,20,0.06);
+  --shadow-lg:    0 12px 40px rgba(26,23,20,0.12), 0 4px 8px rgba(26,23,20,0.06);
+
+  /* Transitions */
+  --ease:         cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--body-serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+button, input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--accent2); }
+
+/* ── Typography Scale ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+h1 { font-size: clamp(40px, 6vw, 72px); }
+h2 { font-size: clamp(28px, 4vw, 44px); }
+h3 { font-size: clamp(20px, 2.5vw, 26px); }
+h4 { font-size: 18px; }
+h5 { font-size: 15px; font-weight: 500; }
+
+p { margin-bottom: 1rem; }
+p:last-child { margin-bottom: 0; }
+
+/* Scholarly lead text */
+.lead {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* Section label — small caps category */
+.label {
+  font-family: var(--body-serif);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Decorative rule */
+.rule-line {
+  width: 48px;
+  height: 2px;
+  background: var(--accent);
+  margin: 16px 0 24px;
+}
+
+/* Monospace text */
+code, kbd, pre {
+  font-family: var(--mono);
+  font-size: 0.875em;
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── Utilities ── */
+.text-center { text-align: center; }
+.text-muted { color: var(--muted); }
+.text-faint { color: var(--faint); }
+.text-accent { color: var(--accent); }
+.italic { font-style: italic; }
+.mono { font-family: var(--mono); }

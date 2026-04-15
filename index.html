@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GenScholar — AI Research Paper Formatter</title>
+<meta name="description" content="Generative AI tool that restructures research drafts into IEEE, APA, Springer, ACM, Scopus, and Elsevier formats."/>
+<link rel="stylesheet" href="frontend/css/base.css"/>
+<link rel="stylesheet" href="frontend/css/components.css"/>
+<link rel="stylesheet" href="frontend/css/layout.css"/>
+<style>
+.hero-paper { animation: float 5s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.co-table { width:100%;border-collapse:collapse;margin-top:32px; }
+.co-table th { text-align:left;padding:12px 16px;font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--faint);border-bottom:2px solid var(--ink);background:var(--cream2); }
+.co-table td { padding:14px 16px;font-size:14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.65; }
+.co-table tr:last-child td { border-bottom:none; }
+.co-table tr:hover td { background:var(--parchment); }
+.co-num { font-family:var(--mono);font-weight:600;color:var(--accent);font-size:13px; }
+.pullout { border-left:3px solid var(--accent);padding:16px 24px;margin:32px 0;background:var(--parchment);border-radius:0 var(--radius) var(--radius) 0; }
+.pullout p { font-family:var(--serif);font-size:18px;font-style:italic;color:var(--ink2);margin:0;line-height:1.6; }
+.pullout cite { display:block;font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:8px;font-style:normal; }
+.tech-stack { display:flex;gap:10px;flex-wrap:wrap;margin-top:16px; }
+.tech-pill { padding:5px 14px;border:1px solid var(--rule2);border-radius:2px;font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--parchment); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="/">Gen<span>Scholar</span></a>
+  <ul class="nav-links">
+    <li><a href="#formats">Formats</a></li>
+    <li><a href="#how">How it Works</a></li>
+    <li><a href="#co-mapping">CO Mapping</a></li>
+    <li><a href="#team">Team</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="btn btn-accent btn-sm" href="frontend/public/index.html">Open Formatter →</a>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="badge-pulse"></span>PCCOE · MDM Generative AI · 2025-26</div>
+      <h1 class="hero-title">Research papers,<br/><em>perfectly formatted</em><br/>in seconds.</h1>
+      <p class="hero-desc">Stop losing hours to citation styles and layout rules. GenScholar uses Google Gemini to restructure your draft into IEEE, APA, Springer, ACM, and more — then flags every compliance issue before submission.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="frontend/public/index.html">Open Formatter →</a>
+        <a class="btn btn-outline btn-lg" href="#how">See How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num">6+</div><div class="stat-lbl">FORMATS SUPPORTED</div></div>
+        <div class="stat-item"><div class="stat-num">10 min</div><div class="stat-lbl">VS 10-HOUR MANUAL</div></div>
+        <div class="stat-item"><div class="stat-num">AI</div><div class="stat-lbl">COMPLIANCE CHECKER</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="hero-paper">
+        <div class="paper-format-badge">IEEE FORMAT</div>
+        <div class="paper-header-line"></div>
+        <div class="paper-title-mock">Deep Learning-Based Detection of Diabetic Retinopathy Using Fundus Photography</div>
+        <div class="paper-authors-mock">A. Kumar¹, P. Sharma², R. Mehta¹ &nbsp;·&nbsp; ¹PCCOE Pune &nbsp;·&nbsp; ²IIT Bombay</div>
+        <div class="paper-rule"></div>
+        <div class="paper-section-mock">Abstract</div>
+        <div class="paper-text-mock">This paper presents a convolutional neural network (CNN) approach for automated diabetic retinopathy detection, achieving 94.2% sensitivity on the EyePACS dataset using transfer learning from ResNet-50 fine-tuned on 80,000 labeled retinal images…</div>
+        <div class="paper-rule"></div>
+        <div class="paper-cols">
+          <div>
+            <div class="paper-section-mock">I. Introduction</div>
+            <div class="paper-col-text">Diabetes mellitus affects approximately 422 million people globally [1]. Among long-term complications, diabetic retinopathy emerges as the most prevalent microvascular complication, affecting up to 80% of patients with 20+ years of disease duration [2]…</div>
+          </div>
+          <div>
+            <div class="paper-section-mock">II. Methodology</div>
+            <div class="paper-col-text">We implemented ResNet-50 pretrained on ImageNet and fine-tuned on EyePACS fundus dataset. Images preprocessed using CLAHE normalization. Model trained 50 epochs with Adam optimizer (lr=0.0001), batch size 32, on 4× NVIDIA V100 GPUs…</div>
+          </div>
+        </div>
+        <div class="paper-rule"></div>
+        <div style="font-size:9px;color:var(--faint);font-family:var(--mono);margin-top:8px">[1] WHO 2023 · [2] Gulshan et al. JAMA 2016 · [3] He et al. CVPR 2016</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="formats">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="label">SUPPORTED STANDARDS</span>
+      <h2>Every major format,<br/>handled with precision.</h2>
+      <div class="rule-line"></div>
+      <p class="lead">Each publication standard has unique citation styles, layout rules, and word limits. Our AI knows them all — in depth.</p>
+    </div>
+    <div class="formats-grid reveal">
+      <div class="fmt-card"><div class="fmt-tag tag-ieee">IEEE</div><div class="fmt-card-name">IEEE Conference & Journal</div><div class="fmt-card-info">Two-column layout, numeric citations [1], Times New Roman 10pt, 8.5×11" page size.</div><div class="fmt-card-rules"><span class="chip">≤250 word abstract</span><span class="chip">6-page limit</span><span class="chip">Numeric refs [1]</span></div></div>
+      <div class="fmt-card"><div class="fmt-tag tag-apa">APA 7th</div><div class="fmt-card-name">American Psychological Association</div><div class="fmt-card-info">Author-year citations (Smith, 2022), double-spaced, 12pt Times New Roman, 1" margins.</div><div class="fmt-card-rules"><span class="chip">150–250 abstract</span><span class="chip">DOI required</span><span class="chip">Running head</span></div></div>
+      <div class="fmt-card"><div class="fmt-tag tag-springer">Springer LNCS</div><div class="fmt-card-name">Springer Lecture Notes in CS</div><div class="fmt-card-info">Single-column, author-year or numeric, LaTeX LNCS class, Keywords section mandatory.</div><div class="fmt-card-rules"><span class="chip">≤150 abstract</span><span class="chip">≤15 pages</span><span class="chip">LaTeX class</span></div></div>
+      <div class="fmt-card"><div class="fmt-tag tag-acm">ACM</div><div class="fmt-card-name">ACM SIGCHI / Digital Library</div><div class="fmt-card-info">Two-column SIGCHI format, numeric citations, CCS Concepts section, ACM rights block.</div><div class="fmt-card-rules"><span class="chip">CCS Concepts</span><span class="chip">150–200 abstract</span><span class="chip">ACM rights block</span></div></div>
+      <div class="fmt-card"><div class="fmt-tag tag-scopus">Scopus</div><div class="fmt-card-name">Scopus Indexed Journals</div><div class="fmt-card-info">Structured abstract (Background/Methods/Results/Conclusion), DOI and ORCID required.</div><div class="fmt-card-rules"><span class="chip">Structured abstract</span><span class="chip">DOI mandatory</span><span class="chip">ORCID required</span></div></div>
+      <div class="fmt-card"><div class="fmt-tag tag-elsevier">Elsevier</div><div class="fmt-card-name">Elsevier Journals</div><div class="fmt-card-info">Harvard-style citations, Highlights section (3–5 bullets ≤125 chars), graphical abstract recommended.</div><div class="fmt-card-rules"><span class="chip">Highlights (3–5)</span><span class="chip">Harvard style</span><span class="chip">≤125 chars/highlight</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="label">PROCESS</span>
+      <h2>From raw draft to<br/>compliant manuscript.</h2>
+      <div class="rule-line"></div>
+      <p class="lead">GenScholar combines large language models with format-specific rule engines to give publication-ready output.</p>
+    </div>
+    <div class="pullout reveal">
+      <p>"Manual reformatting consumes 20–30% of a researcher's time, leading to delayed submissions and high desk rejection rates due to formatting errors."</p>
+      <cite>— Motivation for GenScholar</cite>
+    </div>
+    <div class="steps-grid reveal">
+      <div class="step-card"><div class="step-num">01</div><div class="step-title">Paste your draft</div><div class="step-desc">Upload any text — no specific structure required. Include your title, abstract, body, and references in any order.</div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-title">Select a format</div><div class="step-desc">Choose from IEEE, APA, Springer, ACM, Scopus, or Elsevier. Each has distinct rules the AI knows precisely.</div></div>
+      <div class="step-card"><div class="step-num">03</div><div class="step-title">AI restructures it</div><div class="step-desc">Google Gemini parses the semantic structure — sections, citations, abstract — and reformats everything to spec.</div></div>
+      <div class="step-card"><div class="step-num">04</div><div class="step-title">Review issues</div><div class="step-desc">A compliance report flags every rule violation — errors that cause desk rejection, warnings, and what's correct.</div></div>
+      <div class="step-card"><div class="step-num">05</div><div class="step-title">Analyze deeper</div><div class="step-desc">Check readability scores, abstract structure, citation validity, and word/page count compliance automatically.</div></div>
+      <div class="step-card"><div class="step-num">06</div><div class="step-title">Copy & submit</div><div class="step-desc">Copy the formatted output, fix flagged issues, and submit with confidence. No more desk rejections for formatting.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="co-mapping">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="label">ACADEMIC MAPPING</span>
+      <h2>Course Outcome Alignment</h2>
+      <div class="rule-line"></div>
+      <p class="lead">GenScholar demonstrates real-world Generative AI applications across all four course outcomes.</p>
+    </div>
+    <div class="card-raised reveal" style="overflow:hidden">
+      <table class="co-table">
+        <thead><tr><th>CO</th><th>Outcome</th><th>How GenScholar Demonstrates It</th></tr></thead>
+        <tbody>
+          <tr><td><span class="co-num">CO1</span></td><td><strong>Concepts & Techniques</strong><br/><span style="font-size:12px;color:var(--muted)">Generative AI fundamentals</span></td><td>Uses Gemini LLM to semantically parse paper structure (identifies Abstract, Introduction, Methodology, Citations) and applies format-specific transformation — moving from manual word processing to intent-based document synthesis.</td></tr>
+          <tr><td><span class="co-num">CO2</span></td><td><strong>Financial Impact</strong><br/><span style="font-size:12px;color:var(--muted)">Business & economic relevance</span></td><td>Reduces formatting time from 10 hours to ~10 minutes per paper. Eliminates ₹25,000–₹40,000 professional formatting costs. EdTech SaaS potential: university subscriptions to improve global research output and rankings.</td></tr>
+          <tr><td><span class="co-num">CO3</span></td><td><strong>Simulation & Modeling</strong><br/><span style="font-size:12px;color:var(--muted)">Scientific modeling techniques</span></td><td>Compliance checker simulates manuscript validation against journal-specific constraint rules (word limits, section requirements, citation patterns). Locally computes Flesch-Kincaid readability model to evaluate linguistic complexity.</td></tr>
+          <tr><td><span class="co-num">CO4</span></td><td><strong>Ethics & Responsible AI</strong><br/><span style="font-size:12px;color:var(--muted)">Fairness and accountability</span></td><td>Content preservation guarantee — AI reformats without hallucinating or summarizing technical data. Citation authenticity verification. API key stored locally only. Accessible to non-English researchers, promoting global academic equity.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tech-stack reveal">
+      <span class="tech-pill">Google Gemini</span><span class="tech-pill">Node.js + Express</span><span class="tech-pill">Vanilla JS (ES6+)</span><span class="tech-pill">HTML5 + CSS3</span><span class="tech-pill">REST API</span><span class="tech-pill">Flesch-Kincaid Model</span><span class="tech-pill">JSON Rule Engine</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="team">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="label">PROJECT TEAM</span>
+      <h2>Built at PCCOE</h2>
+      <div class="rule-line"></div>
+      <p class="lead">MDM — Generative AI Applications · Academic Year 2025-26</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:8px" class="reveal">
+      <div class="card"><div style="width:44px;height:44px;background:var(--accent-light);border:1px solid var(--accent-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;color:var(--accent);margin-bottom:14px;font-size:18px">A</div><div style="font-weight:700;font-family:var(--serif);color:var(--ink)">Student A</div><div style="font-size:12px;color:var(--muted);font-family:var(--mono);margin-top:2px">CO1 — Concepts</div><div style="font-size:12px;color:var(--faint);margin-top:6px">AI Architecture & LLM Integration</div></div>
+      <div class="card"><div style="width:44px;height:44px;background:var(--info-bg);border:1px solid #C4D8F0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;color:var(--info);margin-bottom:14px;font-size:18px">B</div><div style="font-weight:700;font-family:var(--serif);color:var(--ink)">Student B</div><div style="font-size:12px;color:var(--muted);font-family:var(--mono);margin-top:2px">CO2 — Finance</div><div style="font-size:12px;color:var(--faint);margin-top:6px">Business Model & Market Analysis</div></div>
+      <div class="card"><div style="width:44px;height:44px;background:var(--ok-bg);border:1px solid #C0DCB8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;color:var(--ok);margin-bottom:14px;font-size:18px">C</div><div style="font-weight:700;font-family:var(--serif);color:var(--ink)">Student C</div><div style="font-size:12px;color:var(--muted);font-family:var(--mono);margin-top:2px">CO3 — Simulation</div><div style="font-size:12px;color:var(--faint);margin-top:6px">Compliance Engine & Rule Modeling</div></div>
+      <div class="card"><div style="width:44px;height:44px;background:var(--warn-bg);border:1px solid #E8D4B4;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;color:var(--warn);margin-bottom:14px;font-size:18px">D</div><div style="font-weight:700;font-family:var(--serif);color:var(--ink)">Student D</div><div style="font-size:12px;color:var(--muted);font-family:var(--mono);margin-top:2px">CO4 — Ethics</div><div style="font-size:12px;color:var(--faint);margin-top:6px">Responsible AI & Content Integrity</div></div>
+    </div>
+    <div style="text-align:center;margin-top:52px" class="reveal">
+      <a class="btn btn-accent btn-lg" href="frontend/public/index.html">Open GenScholar Formatter →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><div class="footer-logo">Gen<span>Scholar</span></div><div class="footer-tagline">AI-powered research paper formatter</div></div>
+  <ul class="footer-links"><li><a href="#formats">Formats</a></li><li><a href="#how">How It Works</a></li><li><a href="#co-mapping">CO Mapping</a></li><li><a href="frontend/public/index.html">Formatter Tool</a></li></ul>
+  <div class="footer-copy">PCCOE · MDM Gen AI Applications · 2025-26 · Built with Google Gemini</div>
+</footer>
+
+<div class="toast" id="gs-toast"></div>
+<script src="frontend/js/ui.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{UI.initScrollReveal();UI.initNavHighlight();});</script>
+</body>
+</html>

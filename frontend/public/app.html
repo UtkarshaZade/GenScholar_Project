@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GenScholar App</title>
+  <link rel="stylesheet" href="css/main.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body { display: flex; height: 100vh; overflow: hidden; margin: 0; background: var(--bg-alt); }
+    
+    /* SIDEBAR */
+    .sidebar { width: 280px; background: white; border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+    .sidebar-header { padding: 20px; border-bottom: 1px solid var(--border); }
+    .sidebar-logo { font-size: 1.25rem; font-weight: 700; font-family: var(--font-serif); color: var(--text-main); text-decoration: none; display:block; }
+    
+    .sidebar-new { margin: 16px; padding: 12px; background: var(--accent); color: white; border-radius: 4px; text-align: center; cursor: pointer; font-weight: 500; font-family: var(--font-body); border: none; font-size: 15px; }
+    .sidebar-new:hover { background: var(--accent-hover); }
+    
+    .sidebar-list { flex: 1; overflow-y: auto; padding: 8px; }
+    .history-item { padding: 12px; margin-bottom: 4px; border-radius: 4px; cursor: pointer; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 14px; font-family: var(--font-body); border: 1px solid transparent; }
+    .history-item:hover { background: var(--bg-hover); }
+    .history-item.active { background: var(--bg-hover); border: 1px solid var(--border); font-weight: 500; color: var(--text-main); }
+    
+    /* MAIN AREA */
+    .main-area { flex: 1; display: flex; flex-direction: column; overflow-y: auto; background: var(--bg-alt); }
+    
+    .top-bar { padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: white; position: sticky; top: 0; z-index: 10; }
+    .top-bar-left { display: flex; gap: 16px; align-items: center; }
+    .top-bar-right { display: flex; gap: 12px; align-items: center; }
+    
+    .download-btn { padding: 8px 16px; background: var(--surface); color: var(--text-main); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-family: var(--font-body); font-weight: 500; display:flex; align-items:center; gap: 8px; }
+    .download-btn:hover { background: var(--bg-hover); }
+    
+    .app-content { flex: 1; padding: 24px; max-width: 1400px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+    
+    /* Layout adjustments for standalone page */
+    .editor-grid { height: calc(100vh - 180px); min-height: 600px; }
+    .paper-input { height: 100%; border: none; resize: none; background: white; }
+    .paper-output { height: 100%; border: none; overflow-y: auto; background: white; padding: 20px; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="sidebar-logo">Gen<em>Scholar</em></a>
+    </div>
+    <button class="sidebar-new" onclick="startNewSession()">+ New Formatting</button>
+    
+
+    <div class="sidebar-list" id="history-list">
+      <div style="padding:16px;color:var(--text-secondary);font-style:italic;font-size:13px;text-align:center;">Loading history...</div>
+    </div>
+  </aside>
+
+  <!-- MAIN APP -->
+  <main class="main-area">
+    
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <label style="font-family: var(--font-body); font-weight: 500; font-size: 15px;">Target Format:</label>
+        <div class="format-pills" style="margin:0; padding:0; justify-content: flex-start; border: none; background: transparent;">
+          <button class="fmt-pill active" data-fmt="IEEE"     onclick="selectFormat(this)">IEEE</button>
+          <button class="fmt-pill"        data-fmt="APA"      onclick="selectFormat(this)">APA 7th</button>
+          <button class="fmt-pill"        data-fmt="Springer" onclick="selectFormat(this)">Springer</button>
+          <button class="fmt-pill"        data-fmt="ACM"      onclick="selectFormat(this)">ACM</button>
+          <button class="fmt-pill"        data-fmt="Scopus"   onclick="selectFormat(this)">Scopus</button>
+          <button class="fmt-pill"        data-fmt="Elsevier" onclick="selectFormat(this)">Elsevier</button>
+        </div>
+      </div>
+      
+      <div class="top-bar-right">
+        <div class="tool-btns" style="margin-right: 12px; display: flex; gap: 8px;">
+          <button class="tool-btn" onclick="runAbstractCheck()" style="padding: 6px 12px; font-size: 11px;">Check Abstract</button>
+          <button class="tool-btn" onclick="runCitationCheck()" style="padding: 6px 12px; font-size: 11px;">Citations</button>
+          <button class="tool-btn" onclick="runReadability()" style="padding: 6px 12px; font-size: 11px;">Readability</button>
+          <button class="tool-btn" onclick="runTitleSuggest()" style="padding: 6px 12px; font-size: 11px;">Suggest Titles</button>
+        </div>
+        <button class="run-btn" id="run-btn" onclick="runAnalysis()" style="margin:0; padding: 10px 20px;">
+          <span id="run-btn-icon">&#9654;</span>
+          <span id="run-btn-text">Analyze &amp; Format</span>
+        </button>
+        <button class="download-btn" onclick="downloadPDF()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          PDF
+        </button>
+      </div>
+    </header>
+
+    <div class="app-content">
+      <div class="fmt-active-rule" id="fmt-active-rule" style="margin-top: 0;">
+        IEEE · Numeric citations [1] · Two-column · Abstract ≤250 words · Times New Roman 10pt · 6-page conference limit. Sections: Abstract → Introduction → Related Work → Methodology → Results → Conclusion → References.
+      </div>
+      
+      <!-- EDITOR GRID MATCHING PREVIOUS LAYOUT -->
+      <div class="editor-grid">
+        <div class="editor-panel">
+          <div class="editor-panel-head">
+            <span class="editor-panel-label" id="draft-title">Your Draft</span>
+            <button class="editor-panel-action" onclick="loadSample()">Load sample</button>
+          </div>
+          <textarea class="paper-input" id="paper-input" placeholder="Paste your research paper draft here…"></textarea>
+        </div>
+        <div class="editor-panel">
+          <div class="editor-panel-head">
+            <span class="editor-panel-label">Formatted Output</span>
+            <button class="editor-panel-action" onclick="copyOutput()">Copy all</button>
+          </div>
+          <!-- ID for PDF capture -->
+          <div class="paper-output" id="paper-output">
+            <div id="pdf-content">
+              <div class="paper-output-placeholder">Formatted paper will appear here. Press 'Analyze & Format' to begin.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS SECTION -->
+      <div id="results-section" style="display:none; margin-top:24px;">
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('compliance', this)">Compliance Report</button>
+          <button class="tab-btn"        onclick="switchTab('metrics', this)">Metrics</button>
+          <button class="tab-btn"        onclick="switchTab('abstract', this)">Abstract Analysis</button>
+          <button class="tab-btn"        onclick="switchTab('citations', this)">Citations</button>
+          <button class="tab-btn"        onclick="switchTab('titles', this)">Titles</button>
+        </div>
+        
+        <div class="tab-panel active" id="tab-compliance">
+          <div class="compliance-panel">
+            <div class="compliance-header">
+              <span class="compliance-title" id="comp-format-label">Compliance Report</span>
+              <span class="compliance-score score-mid" id="comp-score">Score: — / 100</span>
+            </div>
+            <div class="compliance-stats">
+              <div class="cstat"><div class="cstat-n n-err"  id="cnt-err">—</div><div class="cstat-l">Errors</div></div>
+              <div class="cstat"><div class="cstat-n n-warn" id="cnt-warn">—</div><div class="cstat-l">Warnings</div></div>
+              <div class="cstat"><div class="cstat-n n-ok"   id="cnt-ok">—</div><div class="cstat-l">Compliant</div></div>
+            </div>
+            <div class="issues-list" id="issues-list"></div>
+          </div>
+        </div>
+        
+        <div class="tab-panel" id="tab-metrics">
+          <div class="metrics-grid" id="metrics-grid"></div>
+        </div>
+
+        <div class="tab-panel" id="tab-abstract">
+          <div class="abstract-panel" id="abstract-inner"></div>
+        </div>
+        
+        <div class="tab-panel" id="tab-citations">
+          <div class="cite-panel" id="cite-list"></div>
+        </div>
+        
+        <div class="tab-panel" id="tab-titles">
+          <div class="title-panel" id="title-list"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  
+  <div class="toast" id="toast"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
